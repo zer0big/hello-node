@@ -1,16 +1,16 @@
 module.exports = () => {
   
   var mysql      = require('mysql');
-
   
   var con = mysql.createConnection(
     { 
-      host: process.env.MYSQL_HOST || "localhost", 
-      user: process.env.MYSQL_USER || "me", 
-      password: process.env.MYSQL_PASSWORD || "secret" , 
-      database: process.env.MYSQL_DATABASE || "my-db"
+      host: process.env.MYSQL_HOST , 
+      user: process.env.MYSQL_USER , 
+      password: process.env.MYSQL_PASSWORD  , 
+      database: process.env.MYSQL_DATABASE 
     });
 
+    console.log('trying to connecto to ' + process.env.MYSQL_HOST)
 
     con.connect(function(err){
       if(err){

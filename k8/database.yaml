@@ -1,39 +1,34 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: database
   labels:
     app: database
 spec:
-  template:
-    metadata:
-      labels:
-        app: helloworld-db
-    spec:
-      containers:
-      - name: mysql
-        image: mysql:5.7
-        ports:
-        - name: mysql-port
-          containerPort: 3306
-        env:
-          - name: MYSQL_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: helloworld-secrets
-                key: rootPassword
-          - name: MYSQL_USER
-            valueFrom:
-              secretKeyRef:
-                name: helloworld-secrets
-                key: username
-          - name: MYSQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: helloworld-secrets
-                key: password
-          - name: MYSQL_DATABASE
-            valueFrom:
-              secretKeyRef:
-                name: helloworld-secrets
-                key: database
+  containers:
+  - name: mysql
+    image: mysql:5.7
+    ports:
+    - name: mysql-port
+      containerPort: 3306
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: helloworld-secrets
+            key: rootPassword
+      - name: MYSQL_USER
+        valueFrom:
+          secretKeyRef:
+            name: helloworld-secrets
+            key: username
+      - name: MYSQL_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: helloworld-secrets
+            key: password
+      - name: MYSQL_DATABASE
+        valueFrom:
+          secretKeyRef:
+            name: helloworld-secrets
+            key: database
